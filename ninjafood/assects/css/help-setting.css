@@ -1,0 +1,113 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* email-section */
+
+.email-section{
+    width: 100%;
+    height: 100vh;
+    background-image: url(../image/Sign\ Up\ Page.png);
+    background-position: center;
+    background-size: cover;
+    padding-top: 20px;
+}
+
+.email-holder{
+    width: 90%;
+    height: 10vh;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow{
+    width: 30px;
+    height: 30px;
+    background-image: url(../image/Arrow\ 1.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.update{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.profile-holder{
+    width: 16%;
+    height: fit-content;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.email-name{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.email-mat{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.email-id{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    background-image: url(../image/id.png);
+    background-color: #fff;
+    background-position: center;
+    background-size: cover;
+}
+
+.main-section{
+    width: 70%;
+    height: fit-content;
+    margin: auto;
+}
+
+.report-holder{
+    width: 90%;
+    height: fit-content;
+    margin: auto;
+    display: flex;
+    gap: 50px;
+    margin-top: 50px;
+    border-radius: 15px;
+}
+
+.dot{
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 100px;
+    margin-top: 30px;
+}
+
+.text-area{
+    width: 80%;
+    height: fit-content;
+    color: #FFF;
+    background-color: #1F1F1F;
+}
+
+.text-area >p{
+    padding-top: 10px;
+}

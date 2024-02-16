@@ -1,0 +1,206 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.hero-section{
+    width: 100%;
+    height: 100vh;
+    background-image: url(../image/Sign\ Up\ Page.png);
+    background-position: center;
+    background-size: cover;
+    padding-top: 50px;
+    padding-left: 40px;
+}
+
+.header{
+    width: 70%;
+    height: fit-content;
+    display: flex;
+    gap: 500px;
+}
+
+.arrow{
+    width: 30px;
+    height: 30px;
+    background-image: url(../image/Arrow\ 1.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.name{
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 29px;
+    letter-spacing: 0em;
+    color: #fff;
+}
+
+.profile-holder{
+    width: 50%;
+    height: fit-content;
+    margin-top: 20px;
+    margin-left: 90px;
+    display: flex;
+    align-items: center;
+}
+
+.profile-id{
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    background-image: url(../image/id.png);
+    background-position: center;
+    background-size: cover;
+    background-color: #fff;
+}
+
+.name-2{
+    width: 20%;
+    height: fit-content;
+    margin-left: 30px;
+}
+
+.name-id{
+    font-family: Montserrat;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 29px;
+    letter-spacing: 0em; 
+    color: #fff;
+}
+
+.mat-id{
+    font-family: Montserrat;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0em;
+    color: #fff;
+}
+
+.setting{
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    margin-left: 420px;
+    background-image: url(../image/setting.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.review-holder{
+    width: 67%;
+    height: fit-content;
+    margin-left: 40px;
+    display: flex;
+    margin-top: 30px;
+    align-items: center;
+}
+
+.report{
+    font-family: Montserrat;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0em;
+    color: #fff;
+}
+
+.border{
+    width: 160px;
+    height: 5px;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+
+.contribution{
+    font-family: Montserrat;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0em;
+    color: #fff;
+    padding-left: 70px;
+}
+
+.status{
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    color: #fff;
+    padding-left: 420px;
+}
+
+.main-section{
+    width: 67%;
+    height: fit-content;
+    margin-left: 40px;
+    margin-top: 20px;
+    gap: 70px;
+    text-align: center;
+}
+
+.p{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #1F1F1F;
+    border-radius: 15px;
+    border-radius: 15px;
+}
+
+.p-1{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #1F1F1F;
+    border-radius: 15px;
+    border-radius: 15px;
+}
+
+.p-1 >.pending{
+    color: #08B704;
+}
+
+.p-2{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #1F1F1F;
+    border-radius: 15px;
+    border-radius: 15px;
+}
+
+.p-2 >.pending{
+    color: #FF8412;
+}
+
+.text{
+    font-family: Montserrat;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 27px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #fff;
+    width: 80%;
+    padding-left: 20px;
+}
+
+.pending{
+    font-family: Montserrat;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 27px;
+    letter-spacing: 0em;
+    color: #FFC95F;
+}

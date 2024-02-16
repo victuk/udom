@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+/* font-family: 'Montserrat', sans-serif; */
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* first section */
+
+.hero-section{
+    width: 100%;
+    height: 100vh;
+    /* border: 1px solid red; */
+    background-image: url(../image/Sign\ Up\ Page.png);
+    background-position:  center;
+    background-size: cover;
+    padding-top: 80px;
+}
+
+.logo{
+    width: 108px;
+    height: 108px;
+    /* border: 1px solid red; */
+    background-image: url(../image/first-logo.png);
+    background-size: cover;
+    background-position: center;
+    margin-left: 120px;
+}
+
+.system{
+    width: 100%;
+    height: fit-content;
+    /* border: 1px solid red; */
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 40px;
+    margin-top: 60px;
+}
+
+.text-area>h2{
+    width: 60%;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.sign{
+    display: flex;
+}
+
+.btn, .btn-1{
+    width: 140px;
+    height: 45px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    border: 2px solid  #CBB700;
+    color: #CBB700;
+    background-color: #181818;
+    margin-left: 20px;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.btn-1{
+    background-color: #ffffff;
+    border: none;
+}
+
+.btn:hover{
+    background-color: #CBB700;
+    color: #FFF;
+}
+
+.btn-1:hover{
+    background-color: #CBB700;
+    color: #fff;
+}
+
+/* @media screen and (max-width: 768) {
+    .logo{
+        margin-top: 30px;
+    }
+    
+    .text-area>h2{
+        font-size: 20px;
+    }
+} */

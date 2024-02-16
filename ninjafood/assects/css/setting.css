@@ -1,0 +1,198 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.setting{
+    width: 100%;
+    height: 100vh;
+    background-image: url(../image/Sign\ Up\ Page.png);
+    background-position: center;
+    background-size: cover;
+    padding-top: 20px;
+}
+
+.container{
+    width: 90%;
+    height: fit-content;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow{
+    width: 30px;
+    height: 30px;
+    background-image: url(../image/Arrow\ 1.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.setting-text{
+    width: 10%;
+    height: 50px;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.group{
+    width: 20%;
+    height: fit-content;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.user-name{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.user-mat{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.circle{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    background-image: url(../image/id.png);
+    background-position: center;
+    background-size: cover;
+    background-color: #DEDEDE;
+}
+
+.main-section{
+    width: 80%;
+    height: fit-content;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.account-setting{
+    width: 40%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.account-image{
+    width: 30px;
+    height: 30px;
+    background-image: url(../image/setting-1.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.account-text{
+    width: 50%;
+    height: fit-content;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.appear-setting{
+    width: 40%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.appear-image{
+    width: 30px;
+    height: 30px;
+    background-image: url(../image/appear-setting.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.appear-text{
+    width: 50%;
+    height: fit-content;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.help-setting{
+    width: 40%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.help-image{
+    width: 30px;
+    height: 30px;
+    background-image: url(../image/help-setting.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.help-text{
+    width: 50%;
+    height: fit-content;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.log-setting{
+    width: 40%;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.log-image{
+    width: 30px;
+    height: 30px;
+    background-image: url(../image/logout-setting.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.log-text{
+    width: 50%;
+    height: fit-content;
+    color: #F00;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}

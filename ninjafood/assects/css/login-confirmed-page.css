@@ -1,0 +1,77 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.signed-page{
+    width: 100%;
+    height: 100vh;
+    background-image: url(../image/Sign\ Up\ Page.png);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.circle{
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+    fill: #FFF;
+    border-radius: 100px;
+    background-color: #fff;
+    background-image: url(../image/id.png);
+    background-position: center;
+    background-size: cover;
+    margin-left: 25px;
+}
+
+.text{
+    color: rgba(255, 255, 255, 0.51);
+    font-family: Montserrat;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.user-name{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-top: 15px;
+}
+
+.mark{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    background-image: url(../image/Group\ 27\ \(2\).png);
+    background-position: center;
+    background-size: cover;
+    margin-left: 80px;
+    margin-top: 40px;
+}
+
+@media screen and (max-width: 769px) {
+    .holder{
+        margin-top: -100px;
+    }
+
+}
+
+@media screen and (max-width: 320px) {
+    .circle{
+    width: 100px;
+    height: 100px;
+    margin-left: 50px;
+}
+}

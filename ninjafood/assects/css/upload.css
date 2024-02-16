@@ -1,0 +1,138 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.upload{
+    width: 100%;
+    height: 100vh;
+    background-color:  #181818;
+}
+
+.header-report{
+    width: 90%;
+    height: 10vh;
+    margin: auto;
+    display: flex;
+    gap: 500px;
+    align-items: center;
+}
+
+.arrow{
+    width: 30px;
+    height: 30px;
+    background-image: url(../image/Arrow\ 1.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.text{
+    width: 120px;
+    height: fit-content;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.main-section{
+    width: 90%;
+    height: 70vh;
+    margin: auto;
+    margin-top: 20px;
+    padding: 30px;
+    background-color: #212121;
+    border-radius: 15px;
+  
+}
+
+.holder{
+    display: flex;
+}
+
+.profile{
+    width: 50px;
+    height: 50px;
+    background-image: url(../image/id.png);
+    background-position: center;
+    background-size: cover;
+    background-color: #FFF;
+    border-radius: 100px;
+}
+
+.text-name{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 50px;
+}
+
+.login{
+    margin-left: 700px;
+}
+
+.btn{
+    width: 120px;
+    height: 40px;
+    border-radius: 24px;
+    background: #CB8700;
+    color: #FFF;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-1{
+    width: 120px;
+    height: 40px;
+    border-radius: 24px;
+    color: #000;
+    background-color: #FFF;
+    border: none;
+    cursor: pointer;
+}
+
+.text-area{
+    width: 90%;
+    height: 40vh;
+    margin: auto;
+    margin-top: 20px;
+    margin-left: 90px;
+    padding: 10px;
+    color: #FFF;
+    color: #B6B6B6;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.text-area-1{
+    color: #fff;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: #212121;
+    border: none;
+}
+
+.attach{
+    width: 40px;
+    height: 40px;
+    background-image: url(../image/attach.png);
+    background-position: bottom;
+    background-size: cover;
+    border-radius: 100px;
+    border: 2px solid #B6B6B6;
+    margin-left: 550px;
+    margin-top: 20px;
+}
+

@@ -1,0 +1,129 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.signed-up-succ{
+    width: 100%;
+    height: 100vh;
+    background-image: url(../image/Sign\ Up\ Page.png);
+    background-position: center;
+    background-size: cover;
+    padding-left: 20px;
+    padding-top: 30px;
+}
+
+.holder{
+    width: 98%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow{
+    width: 20px;
+    height: 20px;
+    background-image: url(../image/Arrow\ 1.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.email{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.name{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.profile{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    background-image: url(../image/id.png);
+    background-position: center;
+    background-size: cover;
+    background-color: #fff;
+}
+
+.join{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.mark-all{
+    width: 50%;
+    height: 50vh;
+    margin: auto;
+    margin-top: 150px;
+    padding-left: 200px;
+}
+
+.circle{
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+    background-image: url(../image/Group\ 27\ \(2\).png);
+    background-position: center;
+    background-size: cover;
+    margin-left: 80px;
+}
+
+.sign{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-top: 40px;
+    padding-bottom: 50px;
+}
+
+.click >a{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration-line: underline;
+    padding-left: 30px;
+}
+
+@media screen and (max-width: 769px) {
+    .mark-all{
+        margin-top: 80px;
+    }
+
+    .circle{
+        width: 50px;
+        height: 50px;
+        margin-left: -50px;
+    }
+    
+    .sign{
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    .click >a{
+        color: #FFF;
+        font-family: Montserrat;
+        font-size: 10px;
+        padding-left: 20px;
+    }
+}
