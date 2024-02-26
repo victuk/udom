@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./ninjafood/assects/css/post.css">
 </head>
+
 <body>
     <!-- post-section -->
     <section class="post">
@@ -13,52 +15,128 @@
             <div class="logo"></div>
             <div class="home">
                 <div class="logo-1"></div>
-                <div class="logo-2">
+                <div class="logo-2" onclick="location.assign('/note.html')">
                     <div class="dot"></div>
                 </div>
-                <div class="logo-3"></div>
+                <div class="logo-3" onclick="location.assign('/setting.html')"></div>
             </div>
             <div class="name">
-                <div class="name-1"><div class="name">Unyime Okomo</div>
-                <div class="mat">20/132045</div></div>
-                <div class="circle"></div>
+                <div class="name-1">
+                    <div class="name_">loading...</div>
+                    <div class="mat_">loading...</div>
+                </div>
+                <div class="circle" id="circle_"></div>
             </div>
         </div>
         <div class="two">
             <div class="post-view">
                 <div class="hold-post">
-                    <div class="profile-line">
-                        <div class="circle-1"></div>
-                        <div class="post-name">
-                            <div class="person-name">a02-vshl0032</div>
-                            <div class="time">2mins ago</div>
+
+
+
+
+
+                    <!-- <div>
+                        <div class="profile-line-1">
+                            <div class="circle-2"></div>
+                            <div class="post-name">
+                                <div class="person-name">a02-vshl0032</div>
+                                <div class="time">2mins ago</div>
+                            </div>
+                            <div class="Contribute">Contribute</div>
                         </div>
-                        <div class="Contribute">Contribute</div>
-                    </div>
-                    <div class="comment">Two Students fighting in the school parking lot. The boy above is year 
-                        higher than the boy below, probably 2nd year and first year.</div>
-                    <div class="post-image"></div>
-                    <div class="profile-line-1">
-                        <div class="circle-2"></div>
-                        <div class="post-name">
-                            <div class="person-name">a02-vshl0032</div>
-                            <div class="time">2mins ago</div>
-                        </div>
-                        <div class="Contribute">Contribute</div>
-                    </div>
-                    <div class="comment">Two Students fighting in the school parking lot. The boy above is year 
-                        higher than the boy below, probably 2nd year and first year.</div>
-                    <div class="post-image-1"></div>
+                        <div class="comment">Two Students fighting in the school parking lot. The boy above is year
+                            higher than the boy below, probably 2nd year and first year.</div>
+                        <div class="post-image-1"></div>
+                    </div> -->
                 </div>
-                
-            </div><div class="add-post">
+
+            </div>
+            <div class="add-post">
                 <div class="post-line">
-                    <div class="cross"></div>
-                    <div class="click">Click here to make a new report</div>
+                    <div class="cross" onclick="location.assign('/upload.html')"></div>
+                    <div class="click" onclick="location.assign('/upload.html')">Click here to make a new report</div>
                 </div>
             </div>
-            </div>
+        </div>
         </div>
     </section>
 </body>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+<script src="./secret.js"></script>
+<script src="crypto-js.min.js"></script>
+<script src="./getUser.js"></script>
+<script>
+    const firebaseApp = firebase.initializeApp(firebaseConfig);
+    const db = firebaseApp.firestore();
+    const auth = firebaseApp.auth();
+    const storage = firebaseApp.storage();
+
+
+
+    const displayPost = document.querySelector(".hold-post");
+
+    const mat_ = document.querySelector(".mat_")
+    const name_ = document.querySelector(".name_")
+    const circle_ = document.querySelector("#circle_")
+
+
+
+    auth.onAuthStateChanged((user) => {
+            // const u = getUser(user.email)
+            db.collection("users").where("email", "==", user.email).get().then((user) => {
+                let u = user.docs[0].data()
+                console.log(u);
+                mat_.innerHTML = u.trackID
+                circle_.style.backgroundImage = `url('${u.picture}')`
+                name_.innerHTML = `${u.firstName} ${u.lastName}`
+            })
+        })
+
+    function allReports() {
+
+        // const user = getUser(auth.currentUser.email);
+
+
+        db.collection("reports").get().then((querySnapshot) => {
+
+            displayPost.innerHTML = "";
+
+            // console.log(auth.currentUser)
+
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+
+                const docData = doc.data()
+
+                displayPost.innerHTML += `
+                <div>
+                        <div class="profile-line">
+                            <div class="circle-1"></div>
+                            <div class="post-name">
+                                <div class="person-name">a02-vshl0032</div>
+                                <div class="time">2mins ago</div>
+                            </div>
+                            <div class="Contribute" onclick="location.assign('/report-and-contribution.html?postid=${doc.id}')">Contribute</div>
+                        </div>
+                        <div class="comment">${docData.report}</div>
+                        ${docData.picture ? '<div class="post-image" style="background: url(${docData.picture})"></div>' : "<div>No image</div>"}
+                        
+                    </div>
+                `
+
+            });
+        });
+
+    }
+
+    allReports()
+
+</script>
+
 </html>

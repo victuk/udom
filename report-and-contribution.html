@@ -1,0 +1,178 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./ninjafood/assects/css/report-2.css">
+</head>
+
+<body>
+    <!--repost-2-->
+    <section class="report-2">
+        <div class="header">
+            <div class="arrow"></div>
+            <div class="report">
+                <p>Report</p>
+            </div>
+            <div class="avatar">
+                <div class="flex-avatar">
+                    <div id="name_">loading...</div>
+                    <div id="mat_">loading...</div>
+                </div>
+                <div class="avatar-image" id="circle_"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="section-1">
+                <div class="id">
+                    <div class="profile-id"></div>
+                    <div class="not-flex">
+                        <div class="user-name">loading...</div>
+                        <div class="user-mat">loading...</div>
+                    </div>
+                </div>
+                <div class="text-area" id="report-body"></div>
+                <div class="image-area" id="report-image"></div>
+                <div class="comment-space">
+                    <div class="cross"></div>
+                    <input type="search" name="" id="contribution-input" class="input-1" placeholder="Add a Contribution..."> <button id="post-contribution">Post</button>
+                </div>
+            </div>
+            <div class="section-2">
+                <div class="header-c">Contributions</div>
+                <div class="profile-holder" id="contributions-list">
+                    <!-- <div class="first-id">
+                        <div class="circle-1"></div>
+                        <div class="text-1">His name is Marcus O’neil and he is in the
+                            department of Sociology</div>
+                    </div>
+                    <div class="second-id">
+                        <div class="circle-2"></div>
+                        <div class="text-2">I think he’s in the main hostel but i’m not really
+                            sure about that though</div>
+                    </div>
+                    <div class="third-id">
+                        <div class="circle-3"></div>
+                        <div class="text-3">Some of my friends say they fought cause one of
+                            them said something too disrespectful about
+                            their mom</div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    <script src="./secret.js"></script>
+    <script src="crypto-js.min.js"></script>
+    <script src="./getUser.js"></script>
+    <script>
+        const firebaseApp = firebase.initializeApp(firebaseConfig);
+        const db = firebaseApp.firestore();
+        const auth = firebaseApp.auth();
+        const storage = firebaseApp.storage();
+
+        const postID = location.search.slice(8);
+
+        const reportBody = document.getElementById("report-body");
+        const reportImage = document.getElementById("report-image");
+
+        const profilePic = document.querySelector(".profile-id");
+        const userName = document.querySelector(".user-name");
+        const userMat = document.querySelector(".user-mat");
+
+        const contributionsList = document.getElementById("contributions-list");
+        const contributionText = document.getElementById("contribution-input");
+        const addAContribution = document.getElementById("post-contribution");
+
+        const mat_ = document.querySelector("#mat_")
+        const name_ = document.querySelector("#name_")
+        const circle_ = document.querySelector("#circle_")
+
+        auth.onAuthStateChanged((user) => {
+
+
+            db.collection("users").where("email", "==", user.email).get().then((user) => {
+                let u = user.docs[0].data()
+                // console.log(u);
+                mat_.innerHTML = u.trackID
+                circle_.style.backgroundImage = `url('${u.picture}')`
+                name_.innerHTML = `${u.firstName} ${u.lastName}`
+            })
+
+
+            // const u = getUser(user.email)
+            db.collection("reports").doc(postID).get().then(async (user) => {
+                let u = user.data()
+                // console.log(u);
+                console.log("uid", user.id);
+
+                reportBody.innerText = u.report;
+                reportImage.style.backgroundImage = `url('${u.picture}')`
+
+                const userThatReported = await db.collection("users").where("email", "==", auth.currentUser.email).get();
+                const userFetched = userThatReported.docs[0].data();
+                profilePic.style.backgroundImage = `url('${userFetched.picture}')`;
+                userName.innerHTML = `${userFetched.firstName} ${userFetched.lastName}`;
+                userMat.innerHTML = userFetched.trackID
+                console.log(userFetched);
+
+            })
+        })
+
+        addAContribution.addEventListener("click", async () => {
+
+            let userID = await db.collection("users").where("email", "==", auth.currentUser.email).get();
+
+            await db.collection("contributions").add({
+                    reportID: postID,
+                    contribution: contributionText.value,
+                    contributionBy: userID.docs[0].id,
+                    createDate: Date.now()
+                })
+
+                alert("Contribution added successfully!");
+        });
+
+
+
+        function updateReportsAndContributions() {
+            contributionsList.innerHTML = "";
+            db.collection("contributions").where("reportID", "==", postID).get().then((docs) => {
+                docs.forEach((doc) => {
+                    db.collection("users").doc(doc.data().contributionBy).get().then((u) => {
+
+                        console.log(`Contribution ${doc.data().contributionBy} =`, doc.data(), u.data());
+
+                        const contributionDetails = doc.data()
+                        const userDetails = u.data()
+
+                        contributionsList.innerHTML += `
+                        <div class="second-id">
+                        <div class="circle-2" style="background-image: url('${userDetails.picture}')"></div>
+                        <div>
+                            <div>${userDetails.firstName} ${userDetails.lastName}</div>
+                            <div class="text-2">${contributionDetails.contribution}</div>
+                        </div>
+                    </div>
+                        `;
+
+                    });
+                });
+            });
+        }
+
+        updateReportsAndContributions();
+
+        
+
+    </script>
+
+</body>
+
+</html>

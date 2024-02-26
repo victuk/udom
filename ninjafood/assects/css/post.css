@@ -191,6 +191,9 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 20%;
     height: 4vh;
     flex-shrink: 0;

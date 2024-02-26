@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./ninjafood/assects/css/upload.css">
 </head>
+
 <body>
 
     <!-- upload-section -->
@@ -17,22 +19,120 @@
 
         <div class="main-section">
             <div class="holder">
-                <div class="profile"></div>
+                <div class="profile" id="circle_"></div>
                 <div class="text-name">
-                    <div>Unyime Okomo</div>
-                    <div>20/132045</div>
+                    <div class="name_">loading...</div>
+                    <div class="mat_">loading...</div>
                 </div>
                 <div class="login">
-                    <button class="btn">Upload</button>
-                    <button class="btn-1">Cancel</button>
+                    <button class="btn" id="upload-button">Upload</button>
+                    <button class="btn-1" onclick="location.assign('/post.html')">Cancel</button>
                 </div>
             </div>
             <div class="text-area">
-                <textarea name="" id="" cols="120" rows="12" placeholder="Make a new report..." class="text-area-1"></textarea>
+                <textarea name="" id="report" cols="120" rows="12" placeholder="Make a new report..."
+                    class="text-area-1"></textarea>
             </div>
-            <div class="attach"></div>
+            <div class="attach">
+                <input type="file" id="attachment" style="opacity: 0;">
+            </div>
         </div>
-        
+
     </section>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    <script src="./secret.js"></script>
+    <script src="crypto-js.min.js"></script>
+    <script>
+        const firebaseApp = firebase.initializeApp(firebaseConfig);
+        const db = firebaseApp.firestore();
+        const auth = firebaseApp.auth();
+        const storage = firebaseApp.storage();
+
+        const report = document.getElementById("report")
+        const attachment = document.getElementById("attachment")
+        const uploadButton = document.getElementById("upload-button")
+
+        //         auth.onAuthStateChanged((user) => {
+        //   if (user) {
+        //     var uid = user.uid;
+        //     console.log(user)
+        //   } else {
+        //   }
+        // });
+
+        let usersID;
+
+        const mat_ = document.querySelector(".mat_")
+        const name_ = document.querySelector(".name_")
+        const circle_ = document.querySelector("#circle_")
+
+        auth.onAuthStateChanged((u) => {
+            // const u = getUser(user.email)
+            db.collection("users").where("email", "==", u.email).get().then((user) => {
+                let u = user.docs[0].data()
+                // console.log(u);
+                mat_.innerHTML = u.trackID
+                circle_.style.backgroundImage = `url('${u.picture}')`
+                name_.innerHTML = `${u.firstName} ${u.lastName}`
+            })
+        })
+
+
+        uploadButton.addEventListener("click", async () => {
+
+            // console.log(auth.currentUser)
+
+            try {
+
+                let userID = await db.collection("users").where("email", "==", auth.currentUser.email).get();
+    
+                // console.log(userID.docs[0].id);
+
+                uploadButton.innerText = "Uploading... Please Wait!"
+                uploadButton.disabled = true
+
+                let reportObject = {
+                    report: report.value,
+                    fileUrl: ""
+                }
+
+                // console.log(attachment.files.length > 0)
+
+                if (attachment.files.length == 0) return alert("Kindly include a picture as evidence.")
+
+                const attachmentRef = storage.ref()
+
+                // console.log(attachment.files[0])
+
+                const fileRef = await attachmentRef.child(attachment.files[0].name).put(attachment.files[0])
+
+                reportObject.fileUrl = await fileRef.ref.getDownloadURL();
+
+
+                await db.collection("reports").add({
+                    reportBy: userID.docs[0].id,
+                    report: reportObject.report,
+                    picture: reportObject.fileUrl,
+                    createDate: Date.now()
+                })
+
+                alert("uploaded successfully")
+
+            } catch (error) {
+                console.log(error)
+            } finally {
+                uploadButton.innerText = "Upload"
+                uploadButton.disabled = false
+            }
+
+        })
+
+
+    </script>
 </body>
+
 </html>

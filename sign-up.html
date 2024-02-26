@@ -1,27 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./ninjafood/assects/css/sign-up.css">
 </head>
+
 <body>
     <!-- sign-up-section -->
     <section class="sign-up">
         <div class="logo"></div>
         <div class="form">
             <div class="input">
-                <input type="text" class="text-1" placeholder="First Name"><br>
-                <input type="text" class="text-1" placeholder="Last Name"><br>
-                <input type="text" class="text-1" placeholder="Track ID">
+                <input type="text" class="text-1" id="first-name" placeholder="First Name"><br>
+                <input type="text" class="text-1" id="last-name" placeholder="Last Name"><br>
+                <input type="text" class="text-1" id="email" placeholder="Email">
             </div>
             <div class="input-2">
-                <input type="number" class="text-1" placeholder="Phone Number"><br>
-                <input type="email" class="text-1" placeholder="Email"><br>
-                <button class="btn">Sign Up</button>
+                <input type="text" class="text-1" id="trackID" placeholder="Track ID">
+                <input type="number" class="text-1" id="phone-number" placeholder="Phone Number"><br>
+                <input type="password" class="text-1" id="password" placeholder="Password"><br>
+                <input type="password" class="text-1" id="confirm-password" placeholder="Confirm Password"><br>
+                <button class="btn" id="signup-buttton">Sign Up</button>
             </div>
         </div>
     </section>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="./secret.js"></script>
+    <script src="crypto-js.min.js"></script>
+    <script>
+        const firebaseApp = firebase.initializeApp(firebaseConfig);
+        const db = firebaseApp.firestore();
+        const auth = firebaseApp.auth();
+
+        const signUpButton = document.getElementById("signup-buttton")
+        const firstName = document.getElementById("first-name")
+        const lastName = document.getElementById("last-name")
+        const email = document.getElementById("email")
+        const trackID = document.getElementById("trackID")
+        const phoneNumber = document.getElementById("phone-number")
+        const password = document.getElementById("password")
+        const confirmPassword = document.getElementById("confirm-password")
+
+        signUpButton.addEventListener("click", async () => {
+
+            try {
+                if (password.value != confirmPassword.value) return alert("Passwords don't match!")
+
+            const users = await db.collection("users").where("email", "==", email.value).get()
+
+            if (users.docs.length > 0) return alert("Use with tracking ID" + email + "exists! Kindly try another email!")
+
+            await db.collection("users").add({
+                firstName: firstName.value,
+                lastName: lastName.value,
+                email: email.value,
+                picture: "https://firebasestorage.googleapis.com/v0/b/authjarrepsys.appspot.com/o/Nobe%20lie.png?alt=media&token=f67cf2a1-855c-4032-b06f-d4f72419fce8",
+                phoneNumber: phoneNumber.value,
+                email: email.value,
+                trackID: trackID.value
+            })
+
+            const newUser = await auth.createUserWithEmailAndPassword(email.value, password.value)
+
+            console.log(newUser.user)
+
+            // const user = firebase.auth().currentUser;
+            // user.updateProfile({
+            //     displayName: `${firstName} ${lastName}`,
+            //     photoURL: "https://firebasestorage.googleapis.com/v0/b/authjarrepsys.appspot.com/o/Nobe%20lie.png?alt=media&token=f67cf2a1-855c-4032-b06f-d4f72419fce8"
+            // })
+
+
+                location.assign("/sign-up-succ-page.html")
+
+            } catch (error) {
+                alert(error.message)
+            }
+            
+        })
+
+        // const c = async () => {
+        //     try {
+        //         const user = await auth.onAuthStateChanged()
+
+        //         console.log("user", user)
+
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
+        // }
+
+        // c()
+
+    </script>
+
 </body>
+
 </html>

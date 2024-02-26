@@ -13,12 +13,41 @@
         <form>
             <div class="all">
             <div class="logo-2"></div>
-            <input type="text" class="text-1" placeholder="Track id"><br>
-            <input type="password" class="text-1" placeholder="Password">
+            <input type="email" class="text-1" id="email" placeholder="Email"><br>
+            <input type="password" class="text-1" id="password" placeholder="Password">
             <p class="forgot-pass">Forgot Password?</p>
-            <button class="login">Login in</button>
+            <button class="login" id="login-button">Login in</button>
         </div>
         </form>
     </section>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="./secret.js"></script>
+    <script src="crypto-js.min.js"></script>
+    <script>
+        const firebaseApp = firebase.initializeApp(firebaseConfig);
+        const db = firebaseApp.firestore();
+        const auth = firebaseApp.auth();
+
+        const email = document.getElementById("email")
+        const password = document.getElementById("password")
+        const loginButton = document.getElementById("login-button")
+
+        loginButton.addEventListener("click", async function(e) {
+            e.preventDefault()
+            try {
+                await auth.signInWithEmailAndPassword(email.value, password.value)
+    
+                location.assign("/login-confirmed-page.html")
+                
+            } catch (error) {
+                alert(error.message)
+            }
+        })
+
+    </script>
+
 </body>
 </html>
