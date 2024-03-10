@@ -365,3 +365,33 @@
     font-weight: 400;
     line-height: normal;
 }
+
+
+@media screen and (max-width: 769px) {
+    .container {
+        flex-direction: column;
+        height: max-content;
+        overflow-y: scroll;
+        gap: 40px;
+    }
+
+    .report-2 {
+        overflow: hidden;
+    }
+
+    .image-area {
+        width: 70vw;
+        height: 200px;
+    }
+
+    .section-1 {
+        gap: 10px;
+        /* height: 80vh; */
+    }
+
+    .section-2 {
+        margin-left: 0;
+        width: 100%;
+        height: fit-content;
+    }
+}

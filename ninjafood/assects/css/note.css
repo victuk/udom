@@ -124,3 +124,11 @@
     letter-spacing: 0em;
     color: #424242;
 }
+
+
+@media screen and (max-width: 769px) {
+    .note {
+        width: 90%;
+        margin-top: 40px;
+    }
+}
