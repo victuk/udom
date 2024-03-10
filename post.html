@@ -14,9 +14,11 @@
         <div class="header">
             <div class="logo"></div>
             <div class="home">
-                <div class="logo-1"></div>
-                <div class="logo-2" onclick="location.assign('/note.html')">
+                <div class="logo-1" onclick="location.reload()">
                     <div class="dot"></div>
+                </div>
+                <div class="logo-2" onclick="location.assign('/note.html')">
+                    
                 </div>
                 <div class="logo-3" onclick="location.assign('/setting.html')"></div>
             </div>
@@ -30,7 +32,6 @@
         </div>
         <div class="two">
             <div class="post-view">
-                <div class="hold-post">
 
 
 
@@ -49,7 +50,7 @@
                             higher than the boy below, probably 2nd year and first year.</div>
                         <div class="post-image-1"></div>
                     </div> -->
-                </div>
+                
 
             </div>
             <div class="add-post">
@@ -78,7 +79,7 @@
 
 
 
-    const displayPost = document.querySelector(".hold-post");
+    const displayPost = document.querySelector(".post-view");
 
     const mat_ = document.querySelector(".mat_")
     const name_ = document.querySelector(".name_")
@@ -97,6 +98,11 @@
             })
         })
 
+
+        async function getUser(userId) {
+            return await db.collection("users").doc(userId).get().then(u => u.data()).catch(e => "Error:" + e)
+        }
+
     function allReports() {
 
         // const user = getUser(auth.currentUser.email);
@@ -108,26 +114,37 @@
 
             // console.log(auth.currentUser)
 
-            querySnapshot.forEach((doc) => {
+            querySnapshot.forEach(async (doc) => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
 
                 const docData = doc.data()
 
+                const currentUser = await getUser(docData.reportBy);
+
+                console.log("User", currentUser)
+
                 displayPost.innerHTML += `
-                <div>
+                
                         <div class="profile-line">
-                            <div class="circle-1"></div>
-                            <div class="post-name">
-                                <div class="person-name">a02-vshl0032</div>
-                                <div class="time">2mins ago</div>
+
+                            <div>
+                                <div class="circle-1" style="background: url(${currentUser.picture}); background-size: contain;"></div>
                             </div>
-                            <div class="Contribute" onclick="location.assign('/report-and-contribution.html?postid=${doc.id}')">Contribute</div>
+                            <div class="post-body">
+                                <div class="post-name">
+                                    <div>
+                                        <div class="person-name">${currentUser.firstName} ${currentUser.lastName}</div>
+                                        <div class="time">2mins ago</div>
+                                    </div>   
+                                    <div class="Contribute" onclick="location.assign('/report-and-contribution.html?postid=${doc.id}')">Contribute</div>
+                                </div>
+                                <div class="comment">${docData.report}</div>
+                                ${docData.picture ? `<div class="post-image" style="background: url(${docData.picture})"></div>` : "<div>No image</div>"}
+                            </div>
                         </div>
-                        <div class="comment">${docData.report}</div>
-                        ${docData.picture ? '<div class="post-image" style="background: url(${docData.picture})"></div>' : "<div>No image</div>"}
                         
-                    </div>
+                    
                 `
 
             });

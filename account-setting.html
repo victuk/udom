@@ -1,40 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./ninjafood/assects/css/account-setting.css">
 </head>
+
 <body>
 
     <!-- account-setting-section -->
     <section class="acc-setting">
         <div class="acc-hold">
-            <div class="arrow"></div>
+            <div class="arrow" onclick="history.back()"></div>
             <div class="acc-name">Account Settings</div>
             <div class="acc-group">
-                    <div class="name-acc">Unyime Okomo</div>
-                    <div class="name-mat">20/132045</div>
+                <div class="name-acc name_">Unyime Okomo</div>
+                <div class="name-mat mat_">20/132045</div>
             </div>
-            <div class="acc-profile"></div>
+            <div class="acc-profile" id="circle_"></div>
         </div>
         <div class="change-pass">
             <div class="change-password">
                 <div class="dot"></div>
                 <div class="bg-color">
                     <div class="cont">Change Password</div><br>
-                    <p>Update Your Security: Change your account password regularly to enhance the security of your account. Choose a strong and unique password to protect your information.</p>
+                    <p>Update Your Security: Change your account password regularly to enhance the security of your
+                        account. Choose a strong and unique password to protect your information.</p>
                 </div>
-            </div>  
+            </div>
             <div class="change-password">
                 <div class="dot"></div>
                 <div class="bg-color">
                     <div class="cont">Update Email</div><br>
-                    <p class="size">Manage Communication: Change the email address associated with your account for effective communication. Verify the new email address to ensure accurate information delivery.</p>
+                    <p class="size">Manage Communication: Change the email address associated with your account for
+                        effective communication. Verify the new email address to ensure accurate information delivery.
+                    </p>
                 </div>
-            </div>      
+            </div>
         </div>
     </section>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    <script src="./secret.js"></script>
+    <script src="crypto-js.min.js"></script>
+    <script src="./getUser.js"></script>
+    <script>
+
+        const firebaseApp = firebase.initializeApp(firebaseConfig);
+        const db = firebaseApp.firestore();
+        const auth = firebaseApp.auth();
+        const storage = firebaseApp.storage();
+
+        const mat_ = document.querySelector(".mat_")
+        const name_ = document.querySelector(".name_")
+        const circle_ = document.querySelector("#circle_")
+
+
+
+        auth.onAuthStateChanged((user) => {
+            // const u = getUser(user.email)
+            db.collection("users").where("email", "==", user.email).get().then((user) => {
+                let u = user.docs[0].data()
+                console.log(u);
+                mat_.innerHTML = u.trackID
+                circle_.style.backgroundImage = `url('${u.picture}')`
+                name_.innerHTML = `${u.firstName} ${u.lastName}`
+            })
+        })
+
+    </script>
+
 </body>
+
 </html>

@@ -9,13 +9,13 @@
 <body>
     <section class="email-section">
     <div class="email-holder">
-        <div class="arrow"></div>
+        <div class="arrow" onclick="history.back()"></div>
         <div class="update">Help and Support</div>
         <div class="profile-holder">
             <div>
-            <div class="email-name">Unyime Okomo</div>
-            <div class="email-mat">20/132045</div></div>
-            <div class="email-id"></div>
+            <div class="email-name name_">Loading...</div>
+            <div class="email-mat mat_">Loading...</div></div>
+            <div class="email-id" id="circle_"></div>
         </div>
     </div>
 
@@ -35,6 +35,40 @@
             <div class="text-area"><h3>Contact Support</h3><p>Use this form to reach out to our support team for assistance. Provide detailed information about the issue you are facing, including relevant screenshots if possible, to help us address your inquiry promptly.</p></div>
         </div>
     </div>
-    </section>   
+    </section>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    <script src="./secret.js"></script>
+    <script src="crypto-js.min.js"></script>
+    <script src="./getUser.js"></script>
+    <script>
+
+        const firebaseApp = firebase.initializeApp(firebaseConfig);
+        const db = firebaseApp.firestore();
+        const auth = firebaseApp.auth();
+        const storage = firebaseApp.storage();
+
+        const mat_ = document.querySelector(".mat_")
+        const name_ = document.querySelector(".name_")
+        const circle_ = document.querySelector("#circle_")
+
+
+
+        auth.onAuthStateChanged((user) => {
+            // const u = getUser(user.email)
+            db.collection("users").where("email", "==", user.email).get().then((user) => {
+                let u = user.docs[0].data()
+                console.log(u);
+                mat_.innerHTML = u.trackID
+                circle_.style.backgroundImage = `url('${u.picture}')`
+                name_.innerHTML = `${u.firstName} ${u.lastName}`
+            })
+        })
+
+    </script>
+
 </body>
 </html>

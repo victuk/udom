@@ -95,6 +95,27 @@
     color: #424242;
 }
 
+.the-notifications {
+    background-color: rgba(255, 255, 255, 0.2);
+    text-align: left;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.the-notifications:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+}
+
+.notification-header {
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .note >p{
     font-family: Montserrat;
     font-size: 13px;

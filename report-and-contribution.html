@@ -11,7 +11,7 @@
     <!--repost-2-->
     <section class="report-2">
         <div class="header">
-            <div class="arrow"></div>
+            <div class="arrow" onclick="history.back()"></div>
             <div class="report">
                 <p>Report</p>
             </div>
@@ -24,21 +24,36 @@
             </div>
         </div>
         <div class="container">
+
             <div class="section-1">
-                <div class="id">
+                <div>
                     <div class="profile-id"></div>
+                </div>
+                <div>
                     <div class="not-flex">
                         <div class="user-name">loading...</div>
                         <div class="user-mat">loading...</div>
                     </div>
-                </div>
-                <div class="text-area" id="report-body"></div>
-                <div class="image-area" id="report-image"></div>
-                <div class="comment-space">
-                    <div class="cross"></div>
-                    <input type="search" name="" id="contribution-input" class="input-1" placeholder="Add a Contribution..."> <button id="post-contribution">Post</button>
+                    <div class="report-space">
+
+                        <div class="text-area" id="report-body"></div>
+                        <div class="image-area" id="report-image"></div>
+                        <div class="comment-space">
+                            <!-- <div class="cross"></div> -->
+                            <input type="search" name="" id="contribution-input" class="input-1" placeholder="Add a Contribution...">
+                            <button id="post-contribution" class="Contribute">Post</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- <div class="section-1">
+                <div class="id">
+                    
+                    
+                </div>
+                
+            </div> -->
             <div class="section-2">
                 <div class="header-c">Contributions</div>
                 <div class="profile-holder" id="contributions-list">
@@ -129,10 +144,17 @@
 
             let userID = await db.collection("users").where("email", "==", auth.currentUser.email).get();
 
-            await db.collection("contributions").add({
+            const contributiuonResponse = await db.collection("contributions").add({
                     reportID: postID,
                     contribution: contributionText.value,
                     contributionBy: userID.docs[0].id,
+                    createDate: Date.now()
+                })
+
+                await db.collection("notifications").add({
+                    reportID: contributiuonResponse.id,
+                    notificationHeader: `New contribution from ${userID.data().firstName} ${userID.data().lastName}`,
+                    notificationBody: contributionText.value,
                     createDate: Date.now()
                 })
 
@@ -144,6 +166,17 @@
         function updateReportsAndContributions() {
             contributionsList.innerHTML = "";
             db.collection("contributions").where("reportID", "==", postID).get().then((docs) => {
+
+                if(docs.empty) {
+                    contributionsList.innerHTML = `
+                <div style="text-align: center;">
+                    <div style="background-image: url('./ninjafood/assects/image/not-found.jpg'); background-size: contain; width: 200px; height: 145px; background-repeat: no-repeat; border-radius: 8px; margin: 0 auto;"></div>
+                    <div style="font-weight: bold; font-size: 20px;">No Contribution</div>
+                </div>
+                `;
+                return;
+                }
+
                 docs.forEach((doc) => {
                     db.collection("users").doc(doc.data().contributionBy).get().then((u) => {
 

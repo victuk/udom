@@ -51,7 +51,7 @@
     align-items: center;
 }
 
-.user-name{
+.name_{
     color: #FFF;
     font-family: Montserrat;
     font-size: 18px;
@@ -60,7 +60,7 @@
     line-height: normal;
 }
 
-.user-mat{
+.mat_{
     color: #FFF;
     font-family: Montserrat;
     font-size: 14px;

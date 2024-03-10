@@ -106,8 +106,10 @@
     height: fit-content;
     color: #FFF;
     background-color: #1F1F1F;
+    padding: 20px;
+    border-radius: 8px;
 }
 
-.text-area >p{
+.text-area > p{
     padding-top: 10px;
 }

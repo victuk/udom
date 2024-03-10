@@ -15,20 +15,48 @@
             </div>
             <div class="join">
             <div class="name">
-                <p>Unyime Okomo</p>
-                <p>20/132045</p>
+                <p class="name_">Unyime Okomo</p>
+                <p class="mat+">20/132045</p>
             </div>
             <div class="profile"></div>
             </div>
         </div>
         <div class="mark-all">
-            <div class="circle"></div>
+            <div class="circle" id="circle_"></div>
             <div class="sign"><p>Signed Up Successfully!</p></div>
             <!-- <div class="click"><a href="#">click here to go to Login Page</a></div> -->
         </div>
     </section>
 
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    <script src="./secret.js"></script>
     <script>
+
+        const firebaseApp = firebase.initializeApp(firebaseConfig);
+        const db = firebaseApp.firestore();
+        const auth = firebaseApp.auth();
+        const storage = firebaseApp.storage();
+
+        const mat_ = document.querySelector(".mat_")
+    const name_ = document.querySelector(".name_")
+    const circle_ = document.querySelector("#circle_")
+
+
+
+    auth.onAuthStateChanged((user) => {
+            // const u = getUser(user.email)
+            db.collection("users").where("email", "==", user.email).get().then((user) => {
+                let u = user.docs[0].data()
+                console.log(u);
+                mat_.innerHTML = u.trackID
+                circle_.style.backgroundImage = `url('${u.picture}')`
+                name_.innerHTML = `${u.firstName} ${u.lastName}`
+            })
+        })
+
         setTimeout(() => {
             location.assign("/post.html")
         }, 4000);

@@ -63,7 +63,8 @@
                 picture: "https://firebasestorage.googleapis.com/v0/b/authjarrepsys.appspot.com/o/Nobe%20lie.png?alt=media&token=f67cf2a1-855c-4032-b06f-d4f72419fce8",
                 phoneNumber: phoneNumber.value,
                 email: email.value,
-                trackID: trackID.value
+                trackID: trackID.value,
+                createDate: Date.now()
             })
 
             const newUser = await auth.createUserWithEmailAndPassword(email.value, password.value)

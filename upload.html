@@ -13,7 +13,7 @@
     <!-- upload-section -->
     <section class="upload">
         <div class="header-report">
-            <div class="arrow"></div>
+            <div class="arrow" onclick="history.back()"></div>
             <div class="text">New Report</div>
         </div>
 
@@ -90,7 +90,7 @@
 
                 let userID = await db.collection("users").where("email", "==", auth.currentUser.email).get();
     
-                // console.log(userID.docs[0].id);
+                // return console.log(userID.docs[0].data());
 
                 uploadButton.innerText = "Uploading... Please Wait!"
                 uploadButton.disabled = true
@@ -113,14 +113,23 @@
                 reportObject.fileUrl = await fileRef.ref.getDownloadURL();
 
 
-                await db.collection("reports").add({
+                const reportResponse = await db.collection("reports").add({
                     reportBy: userID.docs[0].id,
                     report: reportObject.report,
                     picture: reportObject.fileUrl,
                     createDate: Date.now()
                 })
 
+                await db.collection("notifications").add({
+                    reportID: reportResponse.id,
+                    notificationHeader: `New report from ${userID.docs[0].data().firstName} ${userID.docs[0].data().lastName}`,
+                    notificationBody: reportObject.report,
+                    createDate: Date.now()
+                })
+
                 alert("uploaded successfully")
+
+                // console.log("Report response", );
 
             } catch (error) {
                 console.log(error)

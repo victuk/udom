@@ -1,43 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./ninjafood/assects/css/setting.css">
 </head>
+
 <body>
 
     <!-- setting-section -->
     <section class="setting">
         <div class="container">
-            <div class="arrow"></div>
+            <div class="arrow" onclick="history.back()"></div>
             <div class="setting-text">Settings</div>
             <div class="group">
                 <div>
-                <div class="user-name">Unyime Okomo</div>
-                <div class="user-mat">20/132045</div></div>
-                <div class="circle"></div>
+                    <div class="name_">Loading...</div>
+                    <div class="mat_">Loading...</div>
+                </div>
+                <div class="circle" id="circle_"></div>
             </div>
         </div>
         <div class="main-section">
-            <div class="account-setting">
+            <div class="account-setting" onclick="location.assign('/account-setting.html')">
                 <div class="account-image"></div>
                 <div class="account-text">Account Settings</div>
             </div>
-            <div class="appear-setting">
+            <div class="appear-setting" onclick="location.assign('/dark-mode.html')">
                 <div class="appear-image"></div>
                 <div class="appear-text">Appearance Settings</div>
             </div>
-            <div class="help-setting">
+            <div class="help-setting" onclick="location.assign('/help-setting.html')">
                 <div class="help-image"></div>
                 <div class="help-text">Help and Support</div>
             </div>
             <div class="log-setting">
                 <div class="log-image"></div>
-                <div class="log-text">Log Out</div>
+                <div class="log-text" onclick="logUserOut()">Log Out</div>
             </div>
         </div>
     </section>
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    <script src="./secret.js"></script>
+    <script src="crypto-js.min.js"></script>
+    <script src="./getUser.js"></script>
+    <script>
+
+        const firebaseApp = firebase.initializeApp(firebaseConfig);
+        const db = firebaseApp.firestore();
+        const auth = firebaseApp.auth();
+        const storage = firebaseApp.storage();
+
+        const mat_ = document.querySelector(".mat_")
+    const name_ = document.querySelector(".name_")
+    const circle_ = document.querySelector("#circle_")
+
+
+
+    auth.onAuthStateChanged((user) => {
+            // const u = getUser(user.email)
+            db.collection("users").where("email", "==", user.email).get().then((user) => {
+                let u = user.docs[0].data()
+                console.log(u);
+                mat_.innerHTML = u.trackID
+                circle_.style.backgroundImage = `url('${u.picture}')`
+                name_.innerHTML = `${u.firstName} ${u.lastName}`
+            })
+        })
+
+        function logUserOut() {
+            firebase.auth().signOut().then(() => {
+                location.assign("/login-page.html");
+                // Sign-out successful.
+            }).catch((error) => {
+                // An error happened.
+            });
+        }
+
+    </script>
+
 </body>
+
 </html>
