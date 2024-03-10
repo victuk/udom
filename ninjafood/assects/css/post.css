@@ -296,6 +296,10 @@
     line-height: normal;
 }
 
+.floating-button {
+    display: none;
+}
+
 @media screen and (max-width: 769px) {
 
     .header {
@@ -319,6 +323,7 @@
     }
 
     .floating-button {
+        display: block;
         position: absolute;
         right: 10px;
         bottom: 10px;
