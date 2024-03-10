@@ -1,50 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./ninjafood/assects/css/dark-mode.css">
 </head>
+
 <body>
     <section class="email-section">
         <div class="email-holder">
             <div class="arrow" onclick="history.back()"></div>
             <div class="update">Appearance Settings</div>
             <div class="profile-holder">
-                <div>
-                <div class="email-name name_">Unyime Okomo</div>
-                <div class="email-mat mat_">20/132045</div></div>
-                <div class="email-id" id="circle_"></div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="email-id" id="circle_"></div>
+                    <div>
+                        <div class="email-name name_">Loading...</div>
+                        <div class="email-mat mat_">Loading...</div>
+                    </div>
+                </div>
             </div>
-        </div>   
+        </div>
 
         <div class="main-section">
-            
+
             <div class="dark-setting">
                 <div class="theme">Theme</div>
                 <div class="mode-holder">
-                <div class="light-mode">
-                    <div class="light-mode-image"></div>
-                    <div class="light-mode-button"></div>
-                    <div class="name-light">Light</div>
-                </div>
-                <div class="dark-mode">
-                    <div class="dark-mode-image"></div>
-                    <div class="dark-mode-button"></div>
-                    <div class="name-dark">Dark</div>
-                </div>
+                    <div class="light-mode">
+                        <div class="light-mode-image"></div>
+                        <div class="light-mode-button"></div>
+                        <div class="name-light">Light</div>
+                    </div>
+                    <div class="dark-mode">
+                        <div class="dark-mode-image"></div>
+                        <div class="dark-mode-button"></div>
+                        <div class="name-dark">Dark</div>
+                    </div>
                 </div>
             </div>
             <div class="font-setting">
                 <div class="range">
-                    <div class="p"><p class="p-1">A</p><p class="p-2">A</p></div>
+                    <div class="p">
+                        <p class="p-1">A</p>
+                        <p class="p-2">A</p>
+                    </div>
                     <div class="font-size">Font Size</div>
-                <input type="range" name="" id="" min="10" max="100" value="30"  class="input">
+                    <input type="range" name="" id="" min="10" max="100" value="30" class="input">
                 </div>
             </div>
         </div>
-     </section>
+    </section>
 
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
@@ -80,4 +88,5 @@
     </script>
 
 </body>
+
 </html>
