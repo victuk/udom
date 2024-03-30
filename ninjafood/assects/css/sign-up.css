@@ -65,3 +65,27 @@
     margin-top: 10px;
     cursor: pointer;
 }
+
+@media (max-width: 425px) {
+    .form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .input, .input-2 {
+        
+        width: 100%;
+        padding-left: 20px;
+    }
+
+    .btn {
+        margin-left: 0;
+    }
+
+    .input-2 > button {
+        margin-top: 10px;
+
+    }
+
+   
+}

@@ -38,8 +38,8 @@
         loginButton.addEventListener("click", async function(e) {
             e.preventDefault()
             try {
-                await auth.signInWithEmailAndPassword(email.value, password.value)
-    
+                const response = await auth.signInWithEmailAndPassword(email.value, password.value)
+                console.log(response);
                 location.assign("/login-confirmed-page.html")
                 
             } catch (error) {
