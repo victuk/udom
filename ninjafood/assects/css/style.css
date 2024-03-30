@@ -28,7 +28,8 @@
     background-image: url(../image/first-logo.png);
     background-size: cover;
     background-position: center;
-    margin-left: 120px;
+    /* margin-left: 120px; */
+    margin: 0 auto;
 }
 
 .system{
@@ -89,12 +90,19 @@
     color: #fff;
 }
 
-/* @media screen and (max-width: 768) {
-    .logo{
+@media screen and (max-width: 425px) {
+    /* .logo{
         margin-top: 30px;
-    }
+    } */
     
-    .text-area>h2{
-        font-size: 20px;
+    .text-area, .text-area > h2{
+        /* font-size: 20px; */
+        text-align: center;
+        margin: 0 auto;
     }
-} */
+    .system {
+        display: flex;
+        flex-direction: column;
+        gap: 100px;
+    }
+}
