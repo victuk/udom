@@ -36,12 +36,12 @@
         const storage = firebaseApp.storage();
 
         // const mat_ = document.querySelector(".mat_")
-    const name_ = document.querySelector(".name_")
-    const circle_ = document.querySelector("#circle_")
+        const name_ = document.querySelector(".name_")
+        const circle_ = document.querySelector("#circle_")
 
 
 
-    auth.onAuthStateChanged((user) => {
+        auth.onAuthStateChanged((user) => {
             // const u = getUser(user.email)
             db.collection("users").where("email", "==", user.email).get().then((user) => {
                 let u = user.docs[0].data()
@@ -49,13 +49,15 @@
                 // mat_.innerHTML = u.trackID
                 circle_.style.backgroundImage = `url('${u.picture}')`
                 name_.innerHTML = `${u.firstName} ${u.lastName}`
+
+                setTimeout(() => {
+                    location.assign("/post.html")
+                }, 4000);
+
             })
         })
-
-        setTimeout(() => {
-            location.assign("/post.html")
-        }, 4000);
     </script>
 
 </body>
+
 </html>

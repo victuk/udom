@@ -29,7 +29,7 @@
     background-size: cover;
     background-position: center;
     /* margin-left: 120px; */
-    margin: 0 auto;
+    margin-left: 120px;
 }
 
 .system{
@@ -39,8 +39,8 @@
     font-family: 'Montserrat', sans-serif;
     color: #ffffff;
     display: flex;
-    justify-content: space-evenly;
-    padding: 40px;
+    justify-content: space-between;
+    padding: 120px;
     margin-top: 60px;
 }
 
@@ -91,9 +91,9 @@
 }
 
 @media screen and (max-width: 425px) {
-    /* .logo{
-        margin-top: 30px;
-    } */
+    .logo{
+        margin: 0 auto;
+    }
     
     .text-area, .text-area > h2{
         /* font-size: 20px; */
