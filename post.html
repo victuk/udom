@@ -96,7 +96,7 @@
             // const u = getUser(user.email)
             db.collection("users").where("email", "==", user.email).get().then((user) => {
                 let u = user.docs[0].data()
-                console.log(u);
+                // console.log(u);
                 mat_.innerHTML = u.trackID
                 circle_.style.backgroundImage = `url('${u.picture}')`
                 name_.innerHTML = `${u.firstName} ${u.lastName}`
@@ -121,13 +121,13 @@
 
             querySnapshot.forEach(async (doc) => {
                 // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
+                // console.log(doc.id, " => ", doc.data());
 
                 const docData = doc.data()
 
                 const currentUser = await getUser(docData.reportBy);
 
-                console.log("User", currentUser)
+                // console.log("User", currentUser)
 
                 displayPost.innerHTML += `
                 

@@ -45,7 +45,7 @@
             // const u = getUser(user.email)
             db.collection("users").where("email", "==", user.email).get().then((user) => {
                 let u = user.docs[0].data()
-                console.log(u);
+                // console.log(u);
                 // mat_.innerHTML = u.trackID
                 circle_.style.backgroundImage = `url('${u.picture}')`
                 name_.innerHTML = `${u.firstName} ${u.lastName}`

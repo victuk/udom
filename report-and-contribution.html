@@ -125,7 +125,7 @@
             db.collection("reports").doc(postID).get().then(async (user) => {
                 let u = user.data()
                 // console.log(u);
-                console.log("uid", user.id);
+                // console.log("uid", user.id);
 
                 reportBody.innerText = u.report;
                 reportImage.style.backgroundImage = `url('${u.picture}')`
@@ -135,31 +135,11 @@
                 profilePic.style.backgroundImage = `url('${userFetched.picture}')`;
                 userName.innerHTML = `${userFetched.firstName} ${userFetched.lastName}`;
                 userMat.innerHTML = userFetched.trackID
-                console.log(userFetched);
+                // console.log(userFetched);
 
             })
         })
 
-        addAContribution.addEventListener("click", async () => {
-
-            let userID = await db.collection("users").where("email", "==", auth.currentUser.email).get();
-
-            const contributiuonResponse = await db.collection("contributions").add({
-                    reportID: postID,
-                    contribution: contributionText.value,
-                    contributionBy: userID.docs[0].id,
-                    createDate: Date.now()
-                })
-
-                await db.collection("notifications").add({
-                    reportID: contributiuonResponse.id,
-                    notificationHeader: `New contribution from ${userID.data().firstName} ${userID.data().lastName}`,
-                    notificationBody: contributionText.value,
-                    createDate: Date.now()
-                })
-
-                alert("Contribution added successfully!");
-        });
 
 
 
@@ -180,7 +160,7 @@
                 docs.forEach((doc) => {
                     db.collection("users").doc(doc.data().contributionBy).get().then((u) => {
 
-                        console.log(`Contribution ${doc.data().contributionBy} =`, doc.data(), u.data());
+                        // console.log(`Contribution ${doc.data().contributionBy} =`, doc.data(), u.data());
 
                         const contributionDetails = doc.data()
                         const userDetails = u.data()
@@ -201,6 +181,34 @@
         }
 
         updateReportsAndContributions();
+
+
+
+        addAContribution.addEventListener("click", async () => {
+
+            let userID = await db.collection("users").where("email", "==", auth.currentUser.email).get();
+            
+            const contributiuonResponse = await db.collection("contributions").add({
+                    reportID: postID,
+                    contribution: contributionText.value,
+                    contributionBy: userID.docs[0].id,
+                    createDate: Date.now()
+                })
+
+                await db.collection("notifications").add({
+                    reportID: contributiuonResponse.id,
+                    notificationHeader: `New contribution from ${userID.docs[0].data().firstName} ${userID.docs[0].data().lastName}`,
+                    notificationBody: contributionText.value,
+                    createDate: Date.now()
+                })
+
+                alert("Contribution added successfully!");
+                updateReportsAndContributions();
+        });
+
+
+
+        
 
         
 

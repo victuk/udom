@@ -39,7 +39,7 @@
             e.preventDefault()
             try {
                 const response = await auth.signInWithEmailAndPassword(email.value, password.value)
-                console.log(response);
+                // console.log(response);
                 location.assign("/login-confirmed-page.html")
                 
             } catch (error) {
