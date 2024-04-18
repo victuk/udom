@@ -134,13 +134,15 @@
                         <div class="profile-line">
 
                             <div>
-                                <div class="circle-1" style="background: url(${currentUser.picture}); background-size: contain;"></div>
+                                <!-- <div class="circle-1" style="background: url(${currentUser.picture}); background-size: contain;"></div> -->
+                                <div class="circle-1" style="background-image: url('./ninjafood/assects/image/anon.png'); background-size: contain;"></div>
                             </div>
                             <div class="post-body">
                                 <div class="post-name">
                                     <div>
-                                        <div class="person-name">${currentUser.firstName} ${currentUser.lastName}</div>
-                                        <div class="time">2mins ago</div>
+                                        <!-- <div class="person-name">${currentUser.firstName} ${currentUser.lastName}</div> -->
+                                        <div class="person-name">Anonymous Student</div>
+                                        <div class="time">${new Date(docData.createDate).toLocaleString()}</div>
                                     </div>   
                                     <div class="Contribute" onclick="location.assign('/report-and-contribution.html?postid=${doc.id}')">Contribute</div>
                                 </div>

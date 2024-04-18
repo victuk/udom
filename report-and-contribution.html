@@ -132,9 +132,11 @@
 
                 const userThatReported = await db.collection("users").where("email", "==", auth.currentUser.email).get();
                 const userFetched = userThatReported.docs[0].data();
-                profilePic.style.backgroundImage = `url('${userFetched.picture}')`;
-                userName.innerHTML = `${userFetched.firstName} ${userFetched.lastName}`;
-                userMat.innerHTML = userFetched.trackID
+                // profilePic.style.backgroundImage = `url('${userFetched.picture}')`;
+                profilePic.style.backgroundImage = `url('./ninjafood/assects/image/anon.png')`;
+                // userName.innerHTML = `${userFetched.firstName} ${userFetched.lastName}`;
+                userName.innerHTML = "Anonymous Student";
+                userMat.innerHTML = "";
                 // console.log(userFetched);
 
             })
@@ -169,7 +171,8 @@
                         <div class="second-id">
                         <div class="circle-2" style="background-image: url('${userDetails.picture}')"></div>
                         <div>
-                            <div>${userDetails.firstName} ${userDetails.lastName}</div>
+                            <!-- <div>${userDetails.firstName} ${userDetails.lastName}</div> -->
+                            <div>Anonymous Student</div>
                             <div class="text-2">${contributionDetails.contribution}</div>
                         </div>
                     </div>
@@ -197,7 +200,8 @@
 
                 await db.collection("notifications").add({
                     reportID: contributiuonResponse.id,
-                    notificationHeader: `New contribution from ${userID.docs[0].data().firstName} ${userID.docs[0].data().lastName}`,
+                    // notificationHeader: `New contribution from ${userID.docs[0].data().firstName} ${userID.docs[0].data().lastName}`,
+                    notificationHeader: `New contribution from Anonymous Student`,
                     notificationBody: contributionText.value,
                     createDate: Date.now()
                 })
